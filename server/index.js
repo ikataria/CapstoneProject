@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const {ApolloServer} = require('apollo-server-express')
+
+const User = require('./model/user');
 
 const app = express();
 app.use(express.static('./public'));
-const PORT = 7000;
+const PORT = 7700;
 
 // MongoDb Connection Config
 mongoose.connect('mongodb+srv://admin:admin@cluster0.gxzxfor.mongodb.net/driverkioskcapstone?retryWrites=true&w=majority');
@@ -11,6 +14,91 @@ mongoose.connection.on("connected", function(err, connected){
     if(err) console.log('Error in connection with the Database');
     else console.log("Connected to Database");
 })
+
+const typeDefs = `
+    type user {
+        _id: ID!,
+        id: Int,
+        userName: String,
+        password: String,
+        userType: String,
+        firstName: String,
+        lastName: String,
+        appointmentId: String,
+        age: Int,
+        licenseNumber: String,
+        dob: String,
+        registrationDate: String,
+        make: String,
+        model: String,
+        year: Int,
+        plateNumber: String
+    }
+
+    type Query {
+        userDirectory: [user],
+        getUserByUserName(userName: String): user
+    }
+
+    type Mutation {
+        addUser(userName: String!, password: String!, userType: String!, firstName: String, lastName:String, appointmentId: String, age: Int, licenseNumber: String, dob: String, registrationDate: String, make: String, model: String, year: Int, plateNumber: String) : user,
+    }
+`;
+
+
+const resolvers = {
+    Query: {
+        userDirectory,
+        getUserByUserName
+    },
+
+    Mutation: {
+        addUser
+    }
+}
+
+
+async function userDirectory(){
+    return (await User.find());
+}
+
+async function getUserByUserName(_,{userName}){
+    return (await User.findOne({userName}));
+}
+
+async function addUser(_,{userName, password, userType, firstName, lastName, appointmentId, age, licenseNumber, dob, registrationDate, make, model, year, plateNumber}){
+
+    let userObj = {
+        userName, 
+        password, 
+        userType, 
+        firstName, 
+        lastName, 
+        appointmentId, 
+        age, 
+        licenseNumber, 
+        dob, 
+        registrationDate, 
+        make, 
+        model, 
+        year, 
+        plateNumber
+    }
+
+    let cnt = await (User.find().count());
+    userObj.id = cnt + 1;
+    return await (User.create(userObj));
+}
+
+const server = new ApolloServer({
+    typeDefs, 
+    resolvers 
+});
+
+server.start()
+   .then(()=>{
+       server.applyMiddleware({app, path: '/graphql', cors: true});
+   })
 
 app.get('/', (req, res) => {
    res.render('index.html');

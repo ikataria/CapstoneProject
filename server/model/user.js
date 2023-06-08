@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
+    id: Number,
     userName : {
         type: String,
         unique: true
     },
     password: {
-        type: String,
-    },
-    appointmentId :{
         type: String,
     },
     userType: {
@@ -27,6 +25,10 @@ const userSchema = new Schema({
         // required: true,
         default: 'default'
     },
+    appointmentId :{
+        type: String,
+        default: 'default'
+    },
     age: {
         type: Number,
         // required: true,
@@ -39,6 +41,11 @@ const userSchema = new Schema({
         // unique: true
     },
     dob: {
+        type: Date,
+        default: Date.now()
+        // required: true,
+    },
+    registrationDate: {
         type: Date,
         default: Date.now()
         // required: true,
@@ -63,14 +70,14 @@ const userSchema = new Schema({
     } 
 })
 
-userSchema.pre('save', function(next){
-    const user = this;
+// userSchema.pre('save', function(next){
+//     const user = this;
 
-    bcrypt.hash(user.password, 10, (err, hash) => {
-        user.password = hash;
-        next()
-    })
-});
+//     bcrypt.hash(user.password, 10, (err, hash) => {
+//         user.password = hash;
+//         next()
+//     })
+// });
 
 
 
