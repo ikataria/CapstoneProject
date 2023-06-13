@@ -6,9 +6,13 @@ function Home() {
     return (
         <div >
             <h1>Welcome to driving license kiosk</h1>
-            {/* <button>
-                <Link to="/addEmployee">Let's Start</Link>
-            </button> */}
+            <p>You can grab your G license in 3 stages in Canada.</p>
+            <p>G1 is the first stage.</p>
+            <p>G2 is the second stage.</p>
+            <p>G is the final stage.</p>
+            <button>
+                <Link to="/registration">Let's Start</Link>
+            </button>
         </div>
     )
 }

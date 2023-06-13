@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
 
 import LoginUser from './login';
 
@@ -66,51 +64,7 @@ const RegistrationForm = ({RegisterUser}) => {
 
 // Hit API
 const CreateUser = () => {
-    const [user, setUser] = useState([]);
-    const params = useLocation().search;
-    const userType = new URLSearchParams(params).get('userType');
-
-    // let query = `
-    //     query {
-    //         userDirectory {
-    //             _id
-    //             id
-    //             userName
-    //             password
-    //             userType
-    //         }
-    //     }
-    // `;
-
-    // function fetchData(){
-    //     fetch('http://localhost:7700/graphql',{
-    //         method:'post',
-    //         headers:{'Content-type':'application/json'},
-    //         body: JSON.stringify({query})
-    //     }).then(async(response) => {
-    //         let tempUsers = await response.json();
-
-    //         let tempDirectory = tempUsers.data.userDirectory;
-
-    //         let result = [] ;
-    //         tempUsers.data.userDirectory.forEach(e=>{
-
-    //             if(e.userType == userType){
-    //                 result.push(e);
-    //             } 
   
-    //         })
-
-    //         let toDisplay = result.length > 0 ? result: tempDirectory;
-    //         // console.log('toDisplay>>>>>>',toDisplay);
-    //         setUser(toDisplay);
-    //     })
-    // }
-
-    // useEffect(() => {
-    //     fetchData()
-    // },[userType]);
-
     const RegisterUser = (singleUser) => {
         let query = `
             mutation AddUser($userName: String!, $password: String!, $userType: String!){
@@ -136,8 +90,8 @@ const CreateUser = () => {
             })
         }).then(async (response) => {
             let savedData = await response.json();
-            console.log(__filename,`data to savedData 82`, savedData);
-            alert(`${JSON.stringify(savedData.data)} registered successfully.`)
+            console.log(__filename,`data to savedData 82`, JSON.stringify(savedData));
+            alert(`${JSON.stringify(savedData.data.addUser.userName)} registered successfully.`)
         })
 
     }

@@ -31,7 +31,6 @@ const typeDefs = `
         registrationDate: String,
         make: String,
         model: String,
-        year: Int,
         plateNumber: String
     }
 
@@ -42,6 +41,8 @@ const typeDefs = `
 
     type Mutation {
         addUser(userName: String!, password: String!, userType: String!, firstName: String, lastName:String, appointmentId: String, age: Int, licenseNumber: String, dob: String, registrationDate: String, make: String, model: String, year: Int, plateNumber: String) : user,
+
+        addUserDetails(userName: String!, firstName: String, lastName:String, licenseNumber: String, dob: String, make: String, model: String, plateNumber: String) : user,
     }
 `;
 
@@ -53,7 +54,8 @@ const resolvers = {
     },
 
     Mutation: {
-        addUser
+        addUser,
+        addUserDetails
     }
 }
 
@@ -88,6 +90,22 @@ async function addUser(_,{userName, password, userType, firstName, lastName, app
     let cnt = await (User.find().count());
     userObj.id = cnt + 1;
     return await (User.create(userObj));
+}
+
+async function addUserDetails(_,{userName,firstName, lastName, dob, licenseNumber, make, model, year, plateNumber}){
+
+    let userObj = {
+        firstName, 
+        lastName, 
+        licenseNumber, 
+        dob, 
+        make, 
+        model, 
+        plateNumber
+    }
+
+    return await (User.findOneAndUpdate({userName}, userObj));
+   
 }
 
 const server = new ApolloServer({

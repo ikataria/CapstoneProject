@@ -23,7 +23,7 @@ const LoginForm = ({LoginUser}) => {
     return (
         <div>
             <form name="loginUserForm" onSubmit={handleSubmit}>
-                <h2>Sign-In</h2>
+                <h2>Log-In</h2>
                 <div>
                     <label for="userName">Username</label>
                     <input name="userName" type="text" placeholder="User Name"></input>
@@ -35,7 +35,7 @@ const LoginForm = ({LoginUser}) => {
                 </div>
 
                 <div>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Login" />
                 </div>
             </form>
         </div>
@@ -73,9 +73,9 @@ const LoginUser = () => {
                 alert('Invalid username or password')
             }
             else{
-                // alert(`Welcome ${userData.userName}`)
+                alert(`Welcome ${userData.userName}`)
                 console.log(`Data match. Ready for login`);
-                navigate('/fetchUser')
+                navigate('/driver/addDetails')
             }
 
         })

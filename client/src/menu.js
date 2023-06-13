@@ -8,6 +8,10 @@ function Menu() {
                 <nav>
                     <Link style={{"fontSize":"20px", "font-weight": "700"}} to="/">Home</Link>
                         {' | '}
+                    <Link style={{"fontSize":"20px", "font-weight": "700"}} to="/driver/addDetails">Add Details</Link>
+                    {' | '}
+                    <Link style={{"fontSize":"20px", "font-weight": "700"}} to="/driver/details">Driver</Link>
+                    {' | '}
                     <Link style={{"fontSize":"20px", "font-weight": "700"}} to="/registration">Sign-Up</Link>
                 </nav>
                 <PageRoutes/>                
