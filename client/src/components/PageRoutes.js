@@ -1,8 +1,6 @@
 import {Route, Routes } from "react-router-dom";
 
 import HomePage from "./HomePage";
-
-
 import CreateUser from "./registration";
 import AddUserDetails from "./AddUserDetails";
 // import FetchUser from "./FetchUser";
