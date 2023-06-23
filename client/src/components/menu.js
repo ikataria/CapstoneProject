@@ -18,49 +18,49 @@ function Menu() {
             <PageRoutes />
 
             <footer id="footer">
-            <div className="footer-top">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-4 col-md-6 footer-contact">
-                            <h3>Drive Test</h3>
-                            <p>123 Wilson Ave</p>
-                            <p>Kitchener,ON N2C 3B6</p>
-                            <p>Canada</p>
-                            <p><strong>Phone:</strong> +1 5589 55488 55</p>
-                            <p><strong>Email:</strong> mohit@gmail.com</p>
-                        </div>
+                <div className="upperFooter">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-4 col-md-6 fContact">
+                                <h3 className="logo">DRIVE<span>TEST</span></h3>
+                                <p>1405 Ottawa St N Unit 11</p>
+                                <p>Kitchener, ON N2A 3Z1</p>
+                                <p>Canada</p>
+                                <br></br>
+                                <p><b>Phone:</b> +1 519-721-2744</p>
+                                <p><b>Email:</b> 17kataria@gmail.com</p>
+                            </div>
 
-                        <div className="col-lg-4 col-md-6 footer-links">
-                            <h4>Useful Links</h4>
-                            <ul>
-                                <li><Link className="bx bx-chevron-right" to="/">Home</Link></li>
-                                <li><Link className="bx bx-chevron-right" to="/driver/addDetails">Add Details</Link></li>
-                                <li><Link className="bx bx-chevron-right" to="/driver/details">Driver</Link></li>
-                                <li><Link className="bx bx-chevron-right" to="/registration">Login</Link></li>
-                            </ul>
-                        </div>
+                            <div className="col-lg-4 col-md-6 footer-links">
+                                <h4>Navigation Links</h4>
+                                <ul>
+                                    <li><i class="bx bxl-react bx-tada"></i> <Link to="/">Home</Link></li>
+                                    <li><i class="bx bxl-mongodb bx-tada"></i> <Link to="/driver/addDetails">Add Details</Link></li>
+                                    <li><i class="bx bxl-graphql bx-tada"></i> <Link to="/driver/details">Driver</Link></li>
+                                    <li><i class="bx bxl-nodejs bx-tada"></i> <Link to="/registration">Login</Link></li>
+                                </ul>
+                            </div>
 
-                        <div className="col-lg-4 col-md-6 footer-links">
-                            <h4>Our Social Networks</h4>
-                            <p>Follow us on these social media</p>
-                            <div className="social-links mt-3">
-                                <Link className="twitter"><i className="bx bxl-twitter"></i></Link>
-                                <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
-                                <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
-                                <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
-                                <a href="#" className="google-plus"><i className="bx bxl-skype"></i></a>
-                                <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
+                            <div className="col-lg-4 col-md-6 footer-links">
+                                <h4>Social Networks</h4>
+                                <p>Reach us on social media</p>
+                                <div className="social-links mt-3">
+                                    <a href="#" className="twitter"><i className="bx bxl-twitter"></i></a>
+                                    <a href="#" className="facebook"><i className="bx bxl-facebook"></i></a>
+                                    <a href="#" className="instagram"><i className="bx bxl-instagram"></i></a>
+                                    <a href="#" className="linkedin"><i className="bx bxl-linkedin"></i></a>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="container footer-bottom clearfix">
-                <div className="copyright">
-                    &copy; Copyright <strong><span>Mohit Kataria</span></strong>. All Rights Reserved
+                <div className="container footer-bottom clearfix">
+                    <div className="copyright">
+                        &copy; Copyright <b><span>Team of 5</span></b>. All Rights Reserved
+                    </div>
                 </div>
-            </div>
             </footer>
 
         </BrowserRouter>
