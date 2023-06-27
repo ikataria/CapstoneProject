@@ -1,20 +1,25 @@
+import React from "react";
+import { useState, useEffect } from "react";
 import {Route, Routes } from "react-router-dom";
 
 import HomePage from "./HomePage";
-import CreateUser from "./registration";
+import Registration from "./registration";
+import Login from "./login";
 import AddUserDetails from "./AddUserDetails";
-// import FetchUser from "./FetchUser";
 
+function PageRoutes() {
+    const [currentForm, setCurrentForm] = useState('login');
+    
+    const toggleForm = (formName) => {setCurrentForm(formName)}
 
-function pageRoutes() {
     return (
         <Routes>
             <Route path='/' element={<HomePage/>} />
-            <Route path='/registration' element={<CreateUser/>} />
+            <Route path='/registration' element={currentForm === "login" ? <Login onFormSwitch={toggleForm}/> : <Registration onFormSwitch={toggleForm}/>} />
             <Route path='/driver/addDetails' element={<AddUserDetails/>} />
             {/* <Route path='/fetchUser' element={<FetchUser/>} /> */}
         </Routes>
     )
 }
 
-export default pageRoutes;
+export default PageRoutes;

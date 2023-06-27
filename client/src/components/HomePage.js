@@ -17,7 +17,6 @@ function Home() {
 
                     <p>To manage website traffic and provide a fair, first-in-first-out road test appointment booking experience, we use virtual queue technology.</p>
 
-
                     <Link className="btn btn-success btn-lg" to="/registration">BOOK A ROAD TEST</Link>
                 </div>
             </div>

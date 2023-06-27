@@ -1,9 +1,7 @@
 import React from 'react';
 
-import LoginUser from './login';
-
 // Registration HTML & Validation
-const RegistrationForm = ({RegisterUser}) => {
+const RegistrationForm = ({ RegisterUser, props }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,54 +15,73 @@ const RegistrationForm = ({RegisterUser}) => {
         }
 
         RegisterUser(singleUser);
-       
+
     }
 
     return (
         <div>
             <form name="addUser" onSubmit={handleSubmit}>
-                <h2>Sign-Up</h2>
-                <div>
-                    <label for="userName">Username</label>
-                    <input name="userName" type="text" placeholder="User Name"></input>
-                </div>
+            <h2 className="homePageNewBanner">REGISTRATION FORM</h2>
+                <br />
+                <br/>
+                <br/>
 
-                <div>
-                    <label for="password">Password</label>
-                    <input name="password" type="text" placeholder="Password"></input>
+                <div className="form-group row">
+                    <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
+                    <div className="col-sm-6">
+                        <input name="userName" type="text" placeholder="User Name" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
                 </div>
+                <br />
 
-                <div>
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input name="confirmPassword" type="text" placeholder="Confirm Password"></input>
+                <div className="form-group row">
+                    <label htmlFor="password" className="col-sm-4 col-form-label col-form-label-lg">Password</label>
+                    <div className="col-sm-6">
+                        <input name="password" type="password" placeholder="Password" className="form-control form-control-lg" minlength="6" maxlength="20" required></input>
+                    </div>
                 </div>
+                <br />
 
-                <div>
-                    <label for="userType">User Type</label>
-
-                    <select name="userType" id="userType">
-                        <option value="driver">Driver</option>
-                        <option value="examiner">Examiner</option>
-                        <option value="admin">Admin</option>
-                    </select>
+                <div className="form-group row">
+                    <label htmlFor="confirmPassword" className="col-sm-4 col-form-label col-form-label-lg">Confirm Password</label>
+                    <div className="col-sm-6">
+                        <input name="confirmPassword" type="password" placeholder="Confirm Password" className="form-control form-control-lg" minlength="6" maxlength="20" required></input>
+                    </div>
                 </div>
+                <br />
 
-                <div>
-                    <input type="submit" value="Submit" />
+                <div className="form-group row">
+                    <label htmlFor="userType" className="col-sm-4 col-form-label col-form-label-lg">User Type</label>
+
+                    <div className="col-sm-6">
+                        <select name="userType" className="btn btn-light dropdown-toggle form-control" id="userType">
+                            <option className="dropdown-item" selected>Choose...</option>
+                            <option className="dropdown-item" value="driver">Driver</option>
+                            <option className="dropdown-item" value="examiner">Examiner</option>
+                            <option className="dropdown-item" value="admin">Admin</option>
+                        </select>
+                    </div>
+
                 </div>
+                <br />
+
+                <div className="form-group">
+                    <input type="submit" value="Submit" className="btn btn-success btn-lg" />
+                </div>
+                <br />
+
             </form>
 
-            
-            <div>
-                <LoginUser />
-            </div>
+            <br />
+            <button className="btn btn-link" onClick={() => props.onFormSwitch("login")}>Already have an account? Login here.</button>
         </div>
     )
 }
 
 // Hit API
-const CreateUser = () => {
-  
+const CreateUser = (props) => {
+
     const RegisterUser = (singleUser) => {
         let query = `
             mutation AddUser($userName: String!, $password: String!, $userType: String!){
@@ -78,8 +95,8 @@ const CreateUser = () => {
         `;
 
         fetch('http://localhost:7700/graphql', {
-            method:'post',
-            headers: {'Content-Type': 'application/json'},
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 query,
                 variables: {
@@ -90,7 +107,7 @@ const CreateUser = () => {
             })
         }).then(async (response) => {
             let savedData = await response.json();
-            console.log(__filename,`data to savedData 82`, JSON.stringify(savedData));
+            console.log(__filename, `data to savedData 82`, JSON.stringify(savedData));
             alert(`${JSON.stringify(savedData.data.addUser.userName)} registered successfully.`)
         })
 
@@ -98,7 +115,7 @@ const CreateUser = () => {
 
     return (
         <div>
-            <RegistrationForm RegisterUser={RegisterUser} />
+            <RegistrationForm RegisterUser={RegisterUser} props={props} />
         </div>
     )
 }
