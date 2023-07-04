@@ -53,6 +53,8 @@ const LoginForm = ({ LoginUser, props }) => {
             </form>
 
             <button className="btn btn-link" onClick={() => props.onFormSwitch('registration')}>Don't have an account? Register here.</button>
+            <br />
+            <br />
         </div>
     )
 }

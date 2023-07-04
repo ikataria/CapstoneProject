@@ -4,12 +4,13 @@ const { Schema } = mongoose;
 const appointment = new Schema({
     date: {
         type : String,
-        unique : true
+        default: ""
     },
-    time : {
+    time: {
         type : String,
+        default: ""
     },
-    isTimeSlotAvailable :{
+    isTimeSlotAvailable: {
         type : Boolean, 
         default : true,
     },

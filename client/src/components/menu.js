@@ -18,6 +18,8 @@ function Menu() {
             <PageRoutes />
 
             <footer id="footer">
+            <h2 className="homePageNewBanner"></h2>
+
                 <div className="upperFooter">
                     <div className="container">
                         <div className="row">

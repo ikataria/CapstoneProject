@@ -4,7 +4,15 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    id: Number,
+    // id: Number,
+    firstName: {
+        type: String,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        default: ''
+    },
     userName : {
         type: String,
         unique: true
@@ -15,59 +23,53 @@ const userSchema = new Schema({
     userType: {
         type: String,
     },
-    firstName: {
-        type: String,
-        // required: true,
-        default: 'default'
-    },
-    lastName: {
-        type: String,
-        // required: true,
-        default: 'default'
-    },
-    appointmentId :{
-        type: String,
-        default: 'default'
-    },
     age: {
         type: Number,
-        // required: true,
         default: 0
-    },
-    licenseNumber: {
-        type: String,
-        default: 'default'
-        // required: true,
-        // unique: true
     },
     dob: {
         type: Date,
         default: Date.now()
         // required: true,
     },
+    // appointmentId :{
+    //     type: String,
+    //     default: 'default'
+    // },
+    appointmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Appointment'
+    },
+    licenseNumber: {
+        type: String,
+        default: '',
+        unique: true
+    },
     registrationDate: {
         type: Date,
         default: Date.now()
-        // required: true,
     },
     carDetails: {
         make: { 
             type: String, 
-            default: 'default' 
+            default: '' 
         },
         model: { 
             type: String, 
-            default: 'default' 
-        },
-        year: { 
-            type: Number, 
-            default: 0
+            default: '' 
         },
         plateNumber: { 
             type: String, 
-            default: 'default' 
+            default: '' 
         }
-    } 
+    },
+    comment:{ 
+        type: String, 
+        default: '' 
+    },
+    isPassed:{ 
+        type: Boolean
+    }
 })
 
 // userSchema.pre('save', function(next){

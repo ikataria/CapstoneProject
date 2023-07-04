@@ -21,19 +21,19 @@ const RegistrationForm = ({ RegisterUser, props }) => {
     return (
         <div>
             <form name="addUser" onSubmit={handleSubmit}>
-            <h2 className="homePageNewBanner">REGISTRATION FORM</h2>
+                <h2 className="homePageNewBanner">REGISTRATION FORM</h2>
                 <br />
-                <br/>
-                <br/>
+                <br />
+                <br />
 
                 <div className="form-group row">
                     <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
                     <div className="col-sm-6">
                         <input name="userName" type="text" placeholder="User Name" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <small id="emailHelp" className="form-text text-muted">Remember your username for login functionality.</small>
                     </div>
                 </div>
-                <br />
+                <br/>
 
                 <div className="form-group row">
                     <label htmlFor="password" className="col-sm-4 col-form-label col-form-label-lg">Password</label>
@@ -75,6 +75,9 @@ const RegistrationForm = ({ RegisterUser, props }) => {
 
             <br />
             <button className="btn btn-link" onClick={() => props.onFormSwitch("login")}>Already have an account? Login here.</button>
+            <br />
+            <br />
+
         </div>
     )
 }

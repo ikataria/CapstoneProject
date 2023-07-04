@@ -1,167 +1,172 @@
 // import React from 'react';
-// import { useState, useEffect } from "react";
-// import { useLocation } from 'react-router-dom';
 
 
-// // Registration HTML & Validation
-// const RegistrationForm = ({RegisterUser}) => {
+// // user detail form
+// const UserDetailsForm = ({ SaveUserInfo }) => {
 
 //     const handleSubmit = (e) => {
 //         e.preventDefault();
 
-//         const form = document.forms.addUser;
+//         const form = document.forms.userForm;
 
-//         const singleUser = {
+
+//         const userObj = {
+//             firstName: form.firstName.value.trim().toLowerCase(),
+//             lastName: form.lastName.value.trim().toLowerCase(),
 //             userName: form.userName.value.trim(),
-//             password: form.password.value.trim(),
-//             userType: form.userType.value.trim()
+//             dob: form.dob.value.trim(),
+//             licenseNumber: form.licenseNumber.value.trim().toLowerCase(),
+//             make: form.make.value.trim().toLowerCase(),
+//             model: form.model.value.trim().toLowerCase(),
+//             plateNumber: form.plateNumber.value.trim().toLowerCase(),
 //         }
 
-//         RegisterUser(singleUser);
-       
+//         console.log(`userObj::>`, userObj);
+
+//         SaveUserInfo(userObj);
+
 //     }
 
 //     return (
 //         <div>
-//             <form name="addUser" onSubmit={handleSubmit}>
-//                 <h2>User Details</h2>
-//                 <div>
-//                     <label for="firstName">First Name</label>
-//                     <input name="firstName" type="text" placeholder="First Name"></input>
-//                 </div>
+//             <form name="userForm" onSubmit={handleSubmit}>
+//                 <h2 className="homePageNewBanner">PROVIDE YOUR DETAILS</h2>
+//                 <br />
+//                 <br />
+//                 <br />
 
-//                 <div>
-//                     <label for="lastName">Last Name</label>
-//                     <input name="lastName" type="text" placeholder="Last Name"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
+//                     <div className="col-sm-6">
+//                         <input name="userName" type="text" placeholder="Username" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <div>
-//                     <label for="licenseNumber">License Number</label>
-//                     <input name="licenseNumber" type="text" placeholder="License Number"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="firstName" className="col-sm-4 col-form-label col-form-label-lg">Firstname</label>
+//                     <div className="col-sm-6">
+//                         <input name="firstName" id="firstName" type="text" placeholder="First Name" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <div>
-//                     <label for="age">Age</label>
-//                     <input name="age" type="number" placeholder="Age"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="lastName" className="col-sm-4 col-form-label col-form-label-lg">Lastname</label>
+//                     <div className="col-sm-6">
+//                         <input name="lastName" type="text" placeholder="Last Name" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <div>
-//                     <label for="dob">DOB</label>
-//                     <input name="dob" type="text" placeholder="DOB"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="licenseNumber" className="col-sm-4 col-form-label col-form-label-lg">License Number</label>
+//                     <div className="col-sm-6">
+//                         <input name="licenseNumber" type="text" placeholder="License Number" className="form-control form-control-lg" minlength="15" maxlength="15" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <br/>
-//                 <h2>Car Details</h2>
-//                 <div>
-//                     <label for="make">Make</label>
-//                     <input name="make" type="text" placeholder="Make"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="dob" className="col-sm-4 col-form-label col-form-label-lg">Birth Date</label>
+//                     <div className="col-sm-6">
+//                         <input name="dob" type="date" placeholder="Birth date" className="form-control form-control-lg" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <div>
-//                     <label for="year">Year</label>
-//                     <input name="year" type="number" placeholder="year"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="make" className="col-sm-4 col-form-label col-form-label-lg">Vehicle make</label>
+//                     <div className="col-sm-6">
+//                         <input name="make" type="text" placeholder="Name of Manufacture " className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <div>
-//                     <label for="plateNumber">Plate Number</label>
-//                     <input name="plateNumber" type="text" placeholder="Plate Number"></input>
+//                 <div className="form-group row">
+//                     <label htmlFor="model" className="col-sm-4 col-form-label col-form-label-lg">Vehicle Model</label>
+//                     <div className="col-sm-6">
+//                         <input name="model" type="text" placeholder="Name of Model" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
 //                 </div>
+//                 <br />
 
-//                 <br/>
-//                 <div>
-//                     <input type="submit" value="Submit" />
+
+//                 <div className="form-group row">
+//                     <label htmlFor="plateNumber" className="col-sm-4 col-form-label col-form-label-lg">Plate Number</label>
+//                     <div className="col-sm-6">
+//                         <input name="plateNumber" type="text" placeholder="Plate Number" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+//                     </div>
+//                 </div>
+//                 <br />
+
+//                 <div className="form-group row">
+//                     <label htmlFor="appointmentDate" className="col-sm-4 col-form-label col-form-label-lg">Appointment Date</label>
+//                     <div className="col-sm-6">
+//                         <input name="appointmentDate" type="date" placeholder="Appointment Date" className="form-control form-control-lg" required></input>
+//                     </div>
+//                 </div>
+//                 <br />
+
+//                 <div className="form-group">
+//                     <input type="submit" value="Submit" className="btn btn-success btn-lg" />
 //                 </div>
 //             </form>
 
-            
-         
+//             <br />
+//             <br />
 //         </div>
 //     )
 // }
 
 // // Hit API
-// const FetchUser = () => {
-//     const [user, setUser] = useState([]);
-//     const params = useLocation().search;
-//     const userType = new URLSearchParams(params).get('userType');
+// const AddUserDetails = () => {
 
-//     // let query = `
-//     //     query {
-//     //         userDirectory {
-//     //             _id
-//     //             id
-//     //             userName
-//     //             password
-//     //             userType
-//     //         }
-//     //     }
-//     // `;
-
-//     // function fetchData(){
-//     //     fetch('http://localhost:7700/graphql',{
-//     //         method:'post',
-//     //         headers:{'Content-type':'application/json'},
-//     //         body: JSON.stringify({query})
-//     //     }).then(async(response) => {
-//     //         let tempUsers = await response.json();
-
-//     //         let tempDirectory = tempUsers.data.userDirectory;
-
-//     //         let result = [] ;
-//     //         tempUsers.data.userDirectory.forEach(e=>{
-
-//     //             if(e.userType == userType){
-//     //                 result.push(e);
-//     //             } 
-  
-//     //         })
-
-//     //         let toDisplay = result.length > 0 ? result: tempDirectory;
-//     //         // console.log('toDisplay>>>>>>',toDisplay);
-//     //         setUser(toDisplay);
-//     //     })
-//     // }
-
-//     // useEffect(() => {
-//     //     fetchData()
-//     // },[userType]);
-
-//     const RegisterUser = (singleUser) => {
+//     const SaveUserInfo = (userObj) => {
 //         let query = `
-//             mutation AddUser($userName: String!, $password: String!, $userType: String!){
-//                 addUser(userName: $userName, password: $password, userType: $userType){
-//                     id
+//             mutation AddUserDetails($userName: String!,$firstName: String!, $lastName: String!, $licenseNumber: String!, $dob: String!, $make: String!, $model: String, $plateNumber: String!){
+//                 addUserDetails(userName: $userName, firstName: $firstName, lastName: $lastName, licenseNumber: $licenseNumber, dob: $dob, make: $make, model: $model, plateNumber: $plateNumber){
 //                     userName
-//                     password
-//                     userType
+//                     firstName
+//                     lastName
+//                     licenseNumber
+//                     dob
+//                     make
+//                     model
+//                     plateNumber
 //                 }
 //             }
 //         `;
 
 //         fetch('http://localhost:7700/graphql', {
-//             method:'post',
-//             headers: {'Content-Type': 'application/json'},
+//             method: 'post',
+//             headers: { 'Content-Type': 'application/json' },
 //             body: JSON.stringify({
 //                 query,
 //                 variables: {
-//                     userName: singleUser.userName,
-//                     password: singleUser.password,
-//                     userType: singleUser.userType
+//                     userName: userObj.userName,
+//                     firstName: userObj.firstName,
+//                     lastName: userObj.lastName,
+//                     licenseNumber: userObj.licenseNumber,
+//                     dob: userObj.dob,
+//                     make: userObj.make,
+//                     model: userObj.model,
+//                     plateNumber: userObj.plateNumber
 //                 }
 //             })
 //         }).then(async (response) => {
 //             let savedData = await response.json();
-//             console.log(__filename,`data to savedData 82`, savedData);
-//             alert(`${JSON.stringify(savedData.data)} registered successfully.`)
+//             console.log(__filename, `data to savedData 159>>`, JSON.stringify(savedData.data));
+//             alert(`${JSON.stringify(savedData.data.addUserDetails.firstName)} Details added successfully.`)
 //         })
 
 //     }
 
 //     return (
 //         <div>
-//             <RegistrationForm RegisterUser={RegisterUser} />
+//             <UserDetailsForm SaveUserInfo={SaveUserInfo} />
 //         </div>
 //     )
 // }
 
-// export default FetchUser;
+// export default AddUserDetails;
