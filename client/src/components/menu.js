@@ -11,7 +11,7 @@ function Menu() {
             <nav className="navbar">
                 <Link className="logo" to="/">DRIVE<span>TEST</span></Link>
                 <Link className="navBarList" to="/driver/addDetails">Add Details</Link>
-                <Link className="navBarList" to="/driver/details">Driver</Link>
+                <Link className="navBarList" to="/driver/details/:userName">Driver</Link>
                 <Link className="navBarList" to="/registration">Login</Link>
             </nav>
 

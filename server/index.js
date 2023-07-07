@@ -17,26 +17,26 @@ mongoose.connection.on("connected", function(err, connected){
 
 const typeDefs = `
     type user {
-        _id: ID!,
+        _id: ID,
         id: Int,
-        userName: String,
-        password: String,
-        userType: String,
-        firstName: String,
-        lastName: String,
-        appointmentId: String,
-        age: Int,
-        licenseNumber: String,
-        dob: String,
-        registrationDate: String,
-        make: String,
-        model: String,
-        plateNumber: String
+        UserName: String,
+        Password: String,
+        UserType: String,
+        FirstName: String,
+        LastName: String,
+        AppointmentId: String,
+        Age: Int,
+        LicenseNumber: String,
+        Dob: String,
+        RegistrationDate: String,
+        Make: String,
+        Model: String,
+        PlateNumber: String
     }
 
     type Query {
         userDirectory: [user],
-        getUserByUserName(userName: String): user
+        getUserByUserName(UserName: String): user
     }
 
     type Mutation {
