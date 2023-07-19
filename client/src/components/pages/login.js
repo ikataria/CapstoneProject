@@ -1,13 +1,22 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useReducer, useState, useEffect } from "react";
+// import { useReducer, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
+// import { useNavigate } from "react-router-dom";
+import { AuthData } from "../../auth/AuthWrapper"
 
 
 
 // Login HTML 
 const LoginForm = ({ LoginUser, props }) => {
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+    const { login } = AuthData();
+    const [formData, setFormData] = useReducer((formData, newItem) => { return ({ ...formData, ...newItem }) }, { userName: "", password: "" })
+    const [errorMessage, setErrorMessage] = useState(null)
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const form = document.forms.loginUserForm;
@@ -17,8 +26,27 @@ const LoginForm = ({ LoginUser, props }) => {
             password: form.password.value.trim(),
         }
 
-        LoginUser(userCreds);
+        try {
+            await login(userCreds.userName, userCreds.password);
+            navigate("/driver/addDetails");
+        } catch (error) {
+            
+            setErrorMessage(error)
+        }
     }
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+
+    //     const form = document.forms.loginUserForm;
+
+    //     const userCreds = {
+    //         userName: form.userName.value.trim(),
+    //         password: form.password.value.trim(),
+    //     }
+
+    //     LoginUser(userCreds);
+    // }
 
     return (
         <div>
@@ -32,7 +60,7 @@ const LoginForm = ({ LoginUser, props }) => {
                 <div className="form-group row">
                     <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
                     <div className="col-sm-6">
-                        <input name="userName" placeholder="User Name" type="text" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+                        <input name="userName" placeholder="User Name" type="text" className="form-control form-control-lg" minlength="3" maxlength="25" required value={formData.userName} onChange={(e) => setFormData({userName: e.target.value}) }></input>
                     </div>
                 </div>
                 <br />
@@ -40,7 +68,7 @@ const LoginForm = ({ LoginUser, props }) => {
                 <div className="form-group row">
                     <label htmlFor="password" className="col-sm-4 col-form-label col-form-label-lg">Password</label>
                     <div className="col-sm-6">
-                        <input name="password" className="form-control form-control-lg" type="password" placeholder="Password" minlength="6" maxlength="20" required></input>
+                        <input name="password" className="form-control form-control-lg" type="password" placeholder="Password" minlength="6" maxlength="20" required value={formData.password} onChange={(e) => setFormData({password: e.target.value}) }></input>
                     </div>
                 </div>
                 <br />
@@ -49,7 +77,9 @@ const LoginForm = ({ LoginUser, props }) => {
                     <input type="submit" value="Login" className="btn btn-danger btn-lg" />
                 </div>
                 <br />
-
+                {errorMessage ?
+                    <div className="error">{errorMessage}</div>
+                    : null }
             </form>
 
             <button className="btn btn-link" onClick={() => props.onFormSwitch('registration')}>Don't have an account? Register here.</button>

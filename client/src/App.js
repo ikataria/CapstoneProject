@@ -1,11 +1,16 @@
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-// import './Design.css';
-import Menu from './components/menu';
+
+import Menu from './components/pages/menu';
+import { AuthWrapper } from './auth/AuthWrapper';
 
 function App() {
   return (
     <div className="App">
-      <Menu/>
+      <BrowserRouter>
+        {/* <Menu /> */}
+        <AuthWrapper />
+      </BrowserRouter>
     </div>
   );
 }
