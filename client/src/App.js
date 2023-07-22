@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 
-import Menu from './components/pages/menu';
+// import Menu from './components/pages/menu';
 import { AuthWrapper } from './auth/AuthWrapper';
 
 function App() {
