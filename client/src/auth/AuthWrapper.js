@@ -15,22 +15,35 @@ export const AuthWrapper = () => {
 
      const login = (userName, password) => {
 
-          // Make a call to the authentication API to check the username
-          
-          return new Promise((resolve, reject) => {
+               let query = `
+                    query {
+                         getUserByUserName(userName:"${userName}"){
+                              userName,
+                              password
+                         }
+                    }
+               `;
+   
+               fetch('http://localhost:7700/graphql',{
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+               }).then(async(response) => {
+                    const userDetailsObj = await response.json();
+                    let userDetails = userDetailsObj.data.getUserByUserName;
 
-               if (password === "password") {
-                    setUser({name: userName, isAuthenticated: true})
-                    resolve("success")
-               } else {
-                    reject("Incorrect password")
-               }
-          })
-          
-          
+                    if(userDetails && userDetails.password === password){
+                         setUser({name: userName, isAuthenticated: true})
+                         return "success";
+                    } else {
+                         console.log(`Incorrect pwd or username`);
+                         return "Incorrect password"
+                    }
+               })
      }
-     const logout = () => {
 
+
+     const logout = () => {
           setUser({...user, isAuthenticated: false})
      }
 

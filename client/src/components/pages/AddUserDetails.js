@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthData } from "../../auth/AuthWrapper";
 
 
 // user detail form
@@ -27,6 +28,8 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
 
     }
 
+    const { user } = AuthData();
+
     return (
         <div>
             <form name="userForm" onSubmit={handleSubmit}>
@@ -38,7 +41,7 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
                 <div className="form-group row">
                     <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
                     <div className="col-sm-6">
-                        <input name="userName" type="text" placeholder="Username" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+                        <input name="userName" type="text" placeholder="Username" className="form-control form-control-lg" minlength="3" maxlength="25" required value={user.name}></input>
                     </div>
                 </div>
                 <br />

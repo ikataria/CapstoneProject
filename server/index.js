@@ -19,29 +19,29 @@ const typeDefs = `
     type user {
         _id: ID,
         id: Int,
-        UserName: String,
-        Password: String,
-        UserType: String,
-        FirstName: String,
-        LastName: String,
-        AppointmentId: String,
-        Age: Int,
-        LicenseNumber: String,
-        Dob: String,
-        RegistrationDate: String,
-        Make: String,
-        Model: String,
-        PlateNumber: String
+        userName: String,
+        password: String,
+        userType: String,
+        firstName: String,
+        lastName: String,
+        appointmentId: String,
+        age: Int,
+        licenseNumber: String,
+        dob: String,
+        registrationDate: String,
+        make: String,
+        model: String,
+        plateNumber: String
     }
 
     type Query {
         userDirectory: [user],
-        getUserByUserName(UserName: String): user
+        getUserByUserName(userName:String):user
     }
 
     type Mutation {
+        registerUser(userName: String!, password: String!, userType: String!) : user,
         addUser(userName: String!, password: String!, userType: String!, firstName: String, lastName:String, appointmentId: String, age: Int, licenseNumber: String, dob: String, registrationDate: String, make: String, model: String, year: Int, plateNumber: String) : user,
-
         addUserDetails(userName: String!, firstName: String, lastName:String, licenseNumber: String, dob: String, make: String, model: String, plateNumber: String) : user,
     }
 `;
@@ -54,6 +54,7 @@ const resolvers = {
     },
 
     Mutation: {
+        registerUser,
         addUser,
         addUserDetails
     }
@@ -67,6 +68,20 @@ async function userDirectory(){
 async function getUserByUserName(_,{userName}){
     return (await User.findOne({userName}));
 }
+
+
+async function registerUser(_,{userName, password, userType}){
+
+    let userObj = {
+        userName, 
+        password, 
+        userType
+    }
+
+    return await (User(userObj).save());
+   
+}
+
 
 async function addUser(_,{userName, password, userType, firstName, lastName, appointmentId, age, licenseNumber, dob, registrationDate, make, model, year, plateNumber}){
 

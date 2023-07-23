@@ -27,10 +27,15 @@ const LoginForm = ({ LoginUser, props }) => {
         }
 
         try {
-            await login(userCreds.userName, userCreds.password);
-            navigate("/driver/addDetails");
+            let loginResult = await login(userCreds.userName, userCreds.password);
+            if(loginResult){
+                console.log(`login successfull`)
+                navigate("/driver/addDetails");
+            }
+            navigate("/registration");
+            alert('Wrong Credentials, try again.')
         } catch (error) {
-            
+            console.log(`No response from login API`);
             setErrorMessage(error)
         }
     }
