@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthData } from "../../auth/AuthWrapper";
+import { AuthData } from "../../../auth/AuthWrapper";
 
 
 // user detail form
@@ -12,13 +12,14 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
 
 
         const userObj = {
+            userName: form.userName.value.trim(),
             firstName: form.firstName.value.trim().toLowerCase(),
             lastName: form.lastName.value.trim().toLowerCase(),
-            userName: form.userName.value.trim(),
-            dob: form.dob.value.trim(),
+            age: parseInt(form.age.value.trim()),
             licenseNumber: form.licenseNumber.value.trim().toLowerCase(),
             make: form.make.value.trim().toLowerCase(),
             model: form.model.value.trim().toLowerCase(),
+            year: parseInt(form.year.value.trim()),
             plateNumber: form.plateNumber.value.trim().toLowerCase(),
         }
 
@@ -41,7 +42,7 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
                 <div className="form-group row">
                     <label htmlFor="userName" className="col-sm-4 col-form-label col-form-label-lg">Username</label>
                     <div className="col-sm-6">
-                        <input name="userName" type="text" placeholder="Username" className="form-control form-control-lg" minlength="3" maxlength="25" required value={user.name}></input>
+                        <input name="userName" type="text" placeholder="Username" className="form-control form-control-lg" minlength="3" maxlength="25" required value={user.name} disabled></input>
                     </div>
                 </div>
                 <br />
@@ -63,17 +64,17 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
                 <br />
 
                 <div className="form-group row">
-                    <label htmlFor="licenseNumber" className="col-sm-4 col-form-label col-form-label-lg">License Number</label>
+                    <label htmlFor="age" className="col-sm-4 col-form-label col-form-label-lg">Age</label>
                     <div className="col-sm-6">
-                        <input name="licenseNumber" type="text" placeholder="License Number" className="form-control form-control-lg" minlength="15" maxlength="15" required></input>
+                        <input name="age" type="Number" placeholder="Age" className="form-control form-control-lg" required></input>
                     </div>
                 </div>
                 <br />
 
                 <div className="form-group row">
-                    <label htmlFor="dob" className="col-sm-4 col-form-label col-form-label-lg">Birth Date</label>
+                    <label htmlFor="licenseNumber" className="col-sm-4 col-form-label col-form-label-lg">License Number</label>
                     <div className="col-sm-6">
-                        <input name="dob" type="date" placeholder="Birth date" className="form-control form-control-lg" required></input>
+                        <input name="licenseNumber" type="text" placeholder="License Number" className="form-control form-control-lg" minlength="15" maxlength="15" required></input>
                     </div>
                 </div>
                 <br />
@@ -94,19 +95,18 @@ const UserDetailsForm = ({ SaveUserInfo }) => {
                 </div>
                 <br />
 
-
                 <div className="form-group row">
-                    <label htmlFor="plateNumber" className="col-sm-4 col-form-label col-form-label-lg">Plate Number</label>
+                    <label htmlFor="year" className="col-sm-4 col-form-label col-form-label-lg">Manufacture Year</label>
                     <div className="col-sm-6">
-                        <input name="plateNumber" type="text" placeholder="Plate Number" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
+                        <input name="year" type="Number" placeholder="Year" className="form-control form-control-lg" required></input>
                     </div>
                 </div>
                 <br />
 
                 <div className="form-group row">
-                    <label htmlFor="appointmentDate" className="col-sm-4 col-form-label col-form-label-lg">Appointment Date</label>
+                    <label htmlFor="plateNumber" className="col-sm-4 col-form-label col-form-label-lg">Plate Number</label>
                     <div className="col-sm-6">
-                        <input name="appointmentDate" type="date" placeholder="Appointment Date" className="form-control form-control-lg" required></input>
+                        <input name="plateNumber" type="text" placeholder="Plate Number" className="form-control form-control-lg" minlength="3" maxlength="25" required></input>
                     </div>
                 </div>
                 <br />
@@ -127,22 +127,23 @@ const AddUserDetails = () => {
 
     const SaveUserInfo = (userObj) => {
         let query = `
-            mutation AddUserDetails($userName: String!,$firstName: String!, $lastName: String!, $licenseNumber: String!, $dob: String!, $make: String!, $model: String, $plateNumber: String!){
-                addUserDetails(userName: $userName, firstName: $firstName, lastName: $lastName, licenseNumber: $licenseNumber, dob: $dob, make: $make, model: $model, plateNumber: $plateNumber){
+            mutation AddUserDetails($userName: String!,$firstName: String!, $lastName: String!, $age:Int!, $licenseNumber: String!, $make: String!, $model: String, $year: Int!, $plateNumber: String!){
+                addUserDetails(userName: $userName, firstName: $firstName, lastName: $lastName, age: $age, licenseNumber: $licenseNumber, make: $make, model: $model, year: $year, plateNumber: $plateNumber){
                     userName
                     firstName
                     lastName
+                    age
                     licenseNumber
-                    dob
                     make
                     model
+                    year
                     plateNumber
                 }
             }
         `;
 
         fetch('http://localhost:7700/graphql', {
-            method: 'post',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 query,
@@ -150,17 +151,18 @@ const AddUserDetails = () => {
                     userName: userObj.userName,
                     firstName: userObj.firstName,
                     lastName: userObj.lastName,
+                    age: userObj.age,
                     licenseNumber: userObj.licenseNumber,
-                    dob: userObj.dob,
                     make: userObj.make,
                     model: userObj.model,
+                    year: userObj.year,
                     plateNumber: userObj.plateNumber
                 }
             })
         }).then(async (response) => {
             let savedData = await response.json();
-            console.log(__filename, `data to savedData 159>>`, JSON.stringify(savedData.data));
-            alert(`${JSON.stringify(savedData.data.addUserDetails.firstName)} Details added successfully.`)
+            console.log(`data to savedData 159>>`, JSON.stringify(savedData.data));
+            alert(`${savedData.data.addUserDetails.firstName.toUpperCase()}'s details added successfully.`)
         })
 
     }

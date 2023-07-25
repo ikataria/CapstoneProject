@@ -30,7 +30,14 @@ const userSchema = new Schema({
     dob: {
         type: Date,
         default: Date.now()
-        // required: true,
+    },
+    appointmentDate: {
+        type: Date,
+        default: Date.now()
+    },
+    appointmentTime: {
+        type: String,
+        default: ""
     },
     // appointmentId :{
     //     type: String,
@@ -49,7 +56,7 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now()
     },
-    carDetails: {
+    // carDetails: {
         make: { 
             type: String, 
             default: '' 
@@ -61,8 +68,12 @@ const userSchema = new Schema({
         plateNumber: { 
             type: String, 
             default: '' 
-        }
-    },
+        },
+        year: { 
+            type: Number, 
+            default: '' 
+        },
+    // },
     comment:{ 
         type: String, 
         default: '' 

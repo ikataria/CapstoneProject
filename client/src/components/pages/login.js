@@ -3,7 +3,7 @@ import { useReducer, useState, useEffect } from "react";
 // import { useReducer, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
-import { AuthData } from "../../auth/AuthWrapper"
+import { AuthData } from "../../auth/AuthWrapper";
 
 
 
@@ -27,16 +27,30 @@ const LoginForm = ({ LoginUser, props }) => {
         }
 
         try {
-            let loginResult = await login(userCreds.userName, userCreds.password);
-            if(loginResult){
-                console.log(`login successfull`)
-                navigate("/driver/addDetails");
-            }
-            navigate("/registration");
-            alert('Wrong Credentials, try again.')
+            login(userCreds.userName, userCreds.password)
+                .then(loginResult => {
+                    // console.log(__filename,`loginResult: 32:`, loginResult);
+                    // console.log(`login successfull`)
+                    navigate("/driver/addDetails");
+                })
+                .catch((err) => {
+                    console.log(`FE File: login.js, line 37, err:`,err);
+                    navigate("/registration");
+                    alert('Wrong Credentials, try again.')
+                })
+            // let loginResult = login(userCreds.userName, userCreds.password);
+            
+            // console.log(`loginResult>31>`, loginResult);
+            // if(loginResult){
+            //     console.log(`login successfull`)
+            //     navigate("/driver/addDetails");
+            // }else{
+            //     navigate("/registration");
+            //     alert('Wrong Credentials, try again.')
+            // }
         } catch (error) {
             console.log(`No response from login API`);
-            setErrorMessage(error)
+            // setErrorMessage(error)
         }
     }
 
@@ -97,13 +111,17 @@ const LoginForm = ({ LoginUser, props }) => {
 // Hit API
 const LoginUser = (props) => {
     const navigate = useNavigate();
-    const [user, setUser] = useState([]);
-    const params = useLocation().search;
-    const userType = new URLSearchParams(params).get('userType');
+    // const [user, setUser] = useState([]);
+    // const params = useLocation().search;
+    // const userType = new URLSearchParams(params).get('userType');
 
 
 
+    // fetchData function is not in use
     const fetchData = async (userCreds) => {
+
+        console.log(`122, ye fetchData() kabhi call nhi hoga>>>>>>>>>`);
+        
         let query = `
             query {
                 getUserByUserName(userName:"${userCreds.userName}") {
@@ -132,6 +150,7 @@ const LoginUser = (props) => {
 
         })
     }
+    //--------- NO use of above function
 
 
     return (
